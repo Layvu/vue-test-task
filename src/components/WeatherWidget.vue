@@ -54,60 +54,60 @@
 </template>
 
 <script setup lang="ts">
-import { onMounted, onUnmounted, ref, watch } from 'vue'
-import { useWeatherStore } from '@/stores/weatherStore'
-import { storeToRefs } from 'pinia'
-import { debounce } from 'lodash-es'
-import { initWeatherWebSocket } from '@/utils/websocket'
-import { getSearchHistory, addSearchHistory, clearSearchHistory } from '@/utils/cookieUtils'
-import type { CityInfo } from '@/types/common'
+import { onMounted, onUnmounted, ref, watch } from 'vue';
+import { useWeatherStore } from '@/stores/weatherStore';
+import { storeToRefs } from 'pinia';
+import { debounce } from 'lodash-es';
+import { initWeatherWebSocket } from '@/utils/websocket';
+import { getSearchHistory, addSearchHistory, clearSearchHistory } from '@/utils/cookieUtils';
+import type { CityInfo } from '@/types/common';
 
-const store = useWeatherStore()
-const { searchCities, fetchWeather } = store
-const { currentCityName, error } = storeToRefs(store)
-const searchCity = ref('')
-const suggestions = ref<CityInfo[]>([])
-const searchHistory = ref<string[]>([])
+const store = useWeatherStore();
+const { searchCities, fetchWeather } = store;
+const { currentCityName, error } = storeToRefs(store);
+const searchCity = ref('');
+const suggestions = ref<CityInfo[]>([]);
+const searchHistory = ref<string[]>([]);
 
-let closeWebSocket: (() => void) | null = null
+let closeWebSocket: (() => void) | null = null;
 
 const formatCityName = ({ type, name, state, country }: CityInfo): string => {
-  return [`${type} ${name}`, state, country].filter(Boolean).join(', ')
-}
+  return [`${type} ${name}`, state, country].filter(Boolean).join(', ');
+};
 
 const debouncedFetchCities = debounce(async (value: string | number | null) => {
   if (typeof value === 'string' && value.trim()) {
-    suggestions.value = await searchCities(value)
+    suggestions.value = await searchCities(value);
   } else {
-    suggestions.value = []
+    suggestions.value = [];
   }
-}, 700)
+}, 700);
 
 const selectCity = async (city: CityInfo) => {
-  searchCity.value = ''
-  suggestions.value = []
-  await fetchWeather(city.name)
-  addSearchHistory(city.name)
-  searchHistory.value = getSearchHistory()
+  searchCity.value = '';
+  suggestions.value = [];
+  await fetchWeather(city.name);
+  addSearchHistory(city.name);
+  searchHistory.value = getSearchHistory();
 
-  if (closeWebSocket) closeWebSocket()
-  closeWebSocket = initWeatherWebSocket(city.name)
-}
+  if (closeWebSocket) closeWebSocket();
+  closeWebSocket = initWeatherWebSocket(city.name);
+};
 
 const clearHistory = () => {
-  clearSearchHistory()
-  searchHistory.value = []
-}
+  clearSearchHistory();
+  searchHistory.value = [];
+};
 
 onMounted(() => {
-  searchHistory.value = getSearchHistory()
-})
+  searchHistory.value = getSearchHistory();
+});
 
 watch(error, (newError) => {
-  if (newError) setTimeout(() => (store.error = ''), 3000)
-})
+  if (newError) setTimeout(() => (store.error = ''), 3000);
+});
 
-onUnmounted(() => closeWebSocket?.())
+onUnmounted(() => closeWebSocket?.());
 </script>
 
 <style lang="scss" scoped>

@@ -16,9 +16,9 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue'
+import { ref } from 'vue';
 
-const currentTab = ref('home')
+const currentTab = ref('home');
 </script>
 
 <style lang="scss" scoped>

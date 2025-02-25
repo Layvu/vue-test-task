@@ -10,13 +10,13 @@ export enum CityComponent {
 
 export interface CityResult {
   components: {
-    [key in CityComponent]?: string
-  }
+    [key in CityComponent]?: string;
+  };
 }
 
 export interface CitySearchResponse {
-  results: CityResult[]
+  results: CityResult[];
   status: {
-    code: number
-  }
+    code: number;
+  };
 }

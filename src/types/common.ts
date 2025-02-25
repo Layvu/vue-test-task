@@ -9,20 +9,20 @@ export enum CityTypes {
 }
 
 export interface CityInfo {
-  name: string
-  type: CityTypes
-  country?: string
-  state?: string
+  name: string;
+  type: CityTypes;
+  country?: string;
+  state?: string;
 }
 
 export interface ForecastDay {
-  date: string
-  minTemp: number
-  maxTemp: number
-  humidity: number
-  pressure: number
-  windSpeed: number
-  description: string
-  icon: string
-  hourlyTemps: { time: string; temp: number }[]
+  date: string;
+  minTemp: number;
+  maxTemp: number;
+  humidity: number;
+  pressure: number;
+  windSpeed: number;
+  description: string;
+  icon: string;
+  hourlyTemps: { time: string; temp: number }[];
 }

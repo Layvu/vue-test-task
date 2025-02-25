@@ -22,13 +22,13 @@
 </template>
 
 <script setup lang="ts">
-import WeatherWidget from '@/components/WeatherWidget.vue'
-import WeatherInfo from '@/components/WeatherInfo.vue'
-import { useWeatherStore } from '@/stores/weatherStore'
-import { storeToRefs } from 'pinia'
+import WeatherWidget from '@/components/WeatherWidget.vue';
+import WeatherInfo from '@/components/WeatherInfo.vue';
+import { useWeatherStore } from '@/stores/weatherStore';
+import { storeToRefs } from 'pinia';
 
-const store = useWeatherStore()
-const { isWeatherLoading, isSearchLoading, notifications } = storeToRefs(store)
+const store = useWeatherStore();
+const { isWeatherLoading, isSearchLoading, notifications } = storeToRefs(store);
 </script>
 
 <style lang="scss" scoped>

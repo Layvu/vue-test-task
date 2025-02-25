@@ -57,26 +57,26 @@
 </template>
 
 <script setup lang="ts">
-import { storeToRefs } from 'pinia'
-import { computed, ref } from 'vue'
-import { useWeatherStore } from '@/stores/weatherStore'
-import type { ForecastDay } from '@/types/common'
+import { storeToRefs } from 'pinia';
+import { computed, ref } from 'vue';
+import { useWeatherStore } from '@/stores/weatherStore';
+import type { ForecastDay } from '@/types/common';
 
-const store = useWeatherStore()
-const { forecast } = storeToRefs(store)
-const showDetails = ref(false)
-const selectedDate = ref<string | null>(null)
+const store = useWeatherStore();
+const { forecast } = storeToRefs(store);
+const showDetails = ref(false);
+const selectedDate = ref<string | null>(null);
 
 const filteredForecast = computed<ForecastDay[]>(() => {
-  if (!forecast.value) return []
+  if (!forecast.value) return [];
 
-  const dailyData: Record<string, ForecastDay> = {}
+  const dailyData: Record<string, ForecastDay> = {};
   forecast.value.list.forEach((item) => {
-    const [dateStr, timeStr] = item.dt_txt.split(' ')
+    const [dateStr, timeStr] = item.dt_txt.split(' ');
     const date = new Date(`${dateStr}T${timeStr}Z`).toLocaleDateString('ru', {
       day: 'numeric',
       month: 'long',
-    })
+    });
     if (!dailyData[date]) {
       dailyData[date] = {
         date,
@@ -88,27 +88,27 @@ const filteredForecast = computed<ForecastDay[]>(() => {
         description: item.weather[0].description,
         icon: item.weather[0].main,
         hourlyTemps: [],
-      }
+      };
     }
-    dailyData[date].minTemp = Math.min(dailyData[date].minTemp, item.main.temp)
-    dailyData[date].maxTemp = Math.max(dailyData[date].maxTemp, item.main.temp)
+    dailyData[date].minTemp = Math.min(dailyData[date].minTemp, item.main.temp);
+    dailyData[date].maxTemp = Math.max(dailyData[date].maxTemp, item.main.temp);
     dailyData[date].hourlyTemps.push({
       time: new Date(`${dateStr}T${timeStr}Z`).toLocaleTimeString('ru'),
       temp: item.main.temp,
-    })
-  })
-  return Object.values(dailyData).slice(0, 7)
-})
+    });
+  });
+  return Object.values(dailyData).slice(0, 7);
+});
 
 const selectedDay = computed<ForecastDay | null>(() => {
-  if (!selectedDate.value || !filteredForecast.value.length) return null
-  return filteredForecast.value.find((day) => day.date === selectedDate.value) || null
-})
+  if (!selectedDate.value || !filteredForecast.value.length) return null;
+  return filteredForecast.value.find((day) => day.date === selectedDate.value) || null;
+});
 
 const openDetails = (day: ForecastDay) => {
-  selectedDate.value = day.date
-  showDetails.value = true
-}
+  selectedDate.value = day.date;
+  showDetails.value = true;
+};
 
 const getWeatherIcon = (condition: string) => {
   const icons: Record<string, string> = {
@@ -117,11 +117,11 @@ const getWeatherIcon = (condition: string) => {
     rain: 'grain',
     snow: 'ac_unit',
     thunderstorm: 'flash_on',
-  }
-  return icons[condition.toLowerCase()]
-}
+  };
+  return icons[condition.toLowerCase()];
+};
 
-const round = (value: number | undefined): number => (value === undefined ? 0 : Math.round(value))
+const round = (value: number | undefined): number => (value === undefined ? 0 : Math.round(value));
 </script>
 
 <style lang="scss" scoped>
