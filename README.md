@@ -1,39 +1,57 @@
-# mtc_test_task
+# Weather App
 
-This template should help get you started developing with Vue 3 in Vite.
+Узнать актуальную информацию о погоде в интересующем городе
 
-## Recommended IDE Setup
+[Открыть Weather App](https://layvu-weather-app.netlify.app/)
 
-[VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur).
+## Функционал
 
-## Type Support for `.vue` Imports in TS
+- Поиск города с автодополнением
+- Отображение прогноза погоды на ближайшие дни
+- Расширенная информация о погоде в выбранный день
+- Сохранение истории поиска в куки
 
-TypeScript cannot handle type information for `.vue` imports by default, so we replace the `tsc` CLI with `vue-tsc` for type checking. In editors, we need [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) to make the TypeScript language service aware of `.vue` types.
+## Технологический стек
 
-## Customize configuration
+### Основное
+- **Vue 3**
+- **TypeScript**
+- **Quasar**
+- **Pinia**
+- **Vite**
 
-See [Vite Configuration Reference](https://vite.dev/config/).
+### Дополнительное
+- **Axios**
+- **Lodash**
+- **Git**
+- **ESLint & Prettier**
 
-## Project Setup
+## WebSocket
 
-```sh
-npm install
-```
+- Обновление данных без перезагрузки страницы
+- Сокращение количества запросов к API
 
-### Compile and Hot-Reload for Development
+*Примечание:* WebSocket реализован в виде эмуляции
 
-```sh
-npm run dev
-```
+## Установка и запуск
 
-### Type-Check, Compile and Minify for Production
+1. Клонируйте репозиторий:
+   ```bash
+   git clone https://github.com/ваш-username/weather-app.git
+   cd weather-app
+   ```
 
-```sh
-npm run build
-```
+2. Установите зависимости:
+   ```bash
+   npm install
+   ```
 
-### Lint with [ESLint](https://eslint.org/)
-
-```sh
-npm run lint
-```
+4. Запустите проект локально:
+   ```bash
+   npm run dev
+   ```
+   
+6. Для продакшен-сборки:
+   ```bash
+   npm run build
+   ```
