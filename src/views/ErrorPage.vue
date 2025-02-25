@@ -33,15 +33,18 @@ const goToMainPage = () => {
   &__title {
     font-size: 6rem;
     font-weight: bold;
+    color: IndianRed;
   }
 
   &__subtitle {
     font-size: 1.5rem;
     margin-top: $spacing-small;
+    color: $secondary-color;
   }
 
   &__button {
     margin-top: $spacing-large;
+    background: $primary-color;
   }
 }
 </style>
