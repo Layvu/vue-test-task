@@ -1,0 +1,15 @@
+$primary-color: var(--primary-color, #1976d2);
+$secondary-color: var(--secondary-color, #455a64);
+$text-color: var(--text-color, #333);
+$background-color: var(--background-color, #f9f9f9);
+
+$font-family: var(--font-family, 'Roboto', sans-serif);
+$font-size-base: var(--font-size-base, 16px);
+
+$spacing-small: var(--spacing-small, 8px);
+$spacing-medium: var(--spacing-medium, 16px);
+$spacing-large: var(--spacing-large, 24px);
+
+$box-shadow: var(--box-shadow, 0 4px 6px rgba(0, 0, 0, 0.1));
+
+$transition-duration: var(--transition-duration, 0.3s);
